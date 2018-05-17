@@ -1,6 +1,14 @@
-package com.company.project.exception;
+package com.company.project.core.exception;
 
-public abstract class BaseException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+/**
+ * @author shanchao
+ * @date 2018-05-16
+ */
+@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+public class BaseException extends RuntimeException {
 
     private boolean needLog;
 

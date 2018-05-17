@@ -1,4 +1,4 @@
-package com.company.project.core;
+package com.company.project.core.utils;
 
 import java.lang.reflect.Field;
 

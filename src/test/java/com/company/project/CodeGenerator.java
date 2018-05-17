@@ -62,7 +62,6 @@ public class CodeGenerator extends GeneratorConstant{
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
 
         PluginConfiguration pluginConfiguration = new PluginConfiguration();
-//        pluginConfiguration.setConfigurationType("tk.mybatis.mapper.generator.MapperPlugin");
         pluginConfiguration.setConfigurationType("com.company.project.MyMapperPlugin");
         pluginConfiguration.addProperty("mappers", MAPPER_INTERFACE_REFERENCE);
         context.addPluginConfiguration(pluginConfiguration);
@@ -164,7 +163,6 @@ public class CodeGenerator extends GeneratorConstant{
                 file.getParentFile().mkdirs();
             }
             cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
-//            cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
             System.out.println(modelNameUpperCamel + "Controller.java 生成成功");
         } catch (Exception e) {

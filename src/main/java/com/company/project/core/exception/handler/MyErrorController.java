@@ -1,4 +1,4 @@
-package com.company.project.exception.handler;
+package com.company.project.core.exception.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
@@ -11,6 +11,10 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author shanchao
+ * @date 2018-04-30
+ */
 @RestController
 public class MyErrorController implements ErrorController {
 

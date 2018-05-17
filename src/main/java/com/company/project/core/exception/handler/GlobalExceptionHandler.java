@@ -1,6 +1,7 @@
-package com.company.project.exception.handler;
+package com.company.project.core.exception.handler;
 
-import com.company.project.exception.BaseException;
+import com.company.project.core.exception.BaseException;
+import com.company.project.core.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -17,11 +18,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.*;
 import java.util.function.Supplier;
 
+/**
+ * @author shanchao
+ * @date 2018-04-30
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -83,9 +89,14 @@ public class GlobalExceptionHandler {
         return ErrorVO.of(e.getMessage(), e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(BaseException.class)
-    public ErrorVO handleException(HttpServletRequest request, BaseException e) {
+    public ErrorVO handleException(HttpServletRequest request, HttpServletResponse response, BaseException e) {
+        ResponseStatus status = e.getClass().getAnnotation(ResponseStatus.class);
+        if(status != null){
+            response.setStatus(status.value().value());
+        } else {
+            response.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+        }
         if (e.isNeedLog()) {
             logError(request, e);
         }

@@ -1,8 +1,12 @@
-package com.company.project.exception.handler;
+package com.company.project.core.exception.handler;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+/**
+ * @author shanchao
+ * @date 2018-04-30
+ */
 @Data
 public class ErrorVO {
 
