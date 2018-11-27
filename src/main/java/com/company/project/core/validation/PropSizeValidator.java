@@ -1,5 +1,7 @@
 package com.company.project.core.validation;
 
+import com.company.project.core.utils.BeanUtil;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Array;
@@ -10,7 +12,7 @@ import java.util.Map;
  * @author shanchao
  * @date 2018-05-22
  */
-public class PropSizeValidator implements ConstraintValidator<PropSize, Map> {
+public class PropSizeValidator implements ConstraintValidator<PropSize, Object> {
 
     private String propName;
     private int min;
@@ -26,11 +28,11 @@ public class PropSizeValidator implements ConstraintValidator<PropSize, Map> {
     }
 
     @Override
-    public boolean isValid(Map value, ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (value == null) {
             return nullable;
         }
-        Object propVal = value.get(propName);
+        Object propVal = BeanUtil.getProperty(value, propName);
         if (propVal == null) {
             return nullable;
         }

@@ -1,14 +1,15 @@
 package com.company.project.core.validation;
 
+import com.company.project.core.utils.BeanUtil;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Map;
 
 /**
  * @author shanchao
  * @date 2018-05-22
  */
-public class PropMaxValidator implements ConstraintValidator<PropMax, Map> {
+public class PropMaxValidator implements ConstraintValidator<PropMax, Object> {
 
     private String propName;
     private long max;
@@ -22,11 +23,11 @@ public class PropMaxValidator implements ConstraintValidator<PropMax, Map> {
     }
 
     @Override
-    public boolean isValid(Map value, ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (value == null) {
             return nullable;
         }
-        Object propVal = value.get(propName);
+        Object propVal = BeanUtil.getProperty(value, propName);
         if (propVal == null) {
             return nullable;
         }

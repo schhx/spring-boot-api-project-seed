@@ -1,8 +1,9 @@
 package com.company.project.core.validation;
 
+import com.company.project.core.utils.BeanUtil;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
  * @author shanchao
  * @date 2018-05-22
  */
-public class PropPatternValidator implements ConstraintValidator<PropPattern, Map> {
+public class PropPatternValidator implements ConstraintValidator<PropPattern, Object> {
 
     private String propName;
     private String regex;
@@ -26,11 +27,11 @@ public class PropPatternValidator implements ConstraintValidator<PropPattern, Ma
     }
 
     @Override
-    public boolean isValid(Map value, ConstraintValidatorContext context) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (value == null) {
             return nullable;
         }
-        Object propVal = value.get(propName);
+        Object propVal = BeanUtil.getProperty(value, propName);
         if (propVal == null) {
             return nullable;
         }

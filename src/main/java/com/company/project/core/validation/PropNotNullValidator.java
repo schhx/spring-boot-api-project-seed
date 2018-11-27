@@ -1,14 +1,15 @@
 package com.company.project.core.validation;
 
+import com.company.project.core.utils.BeanUtil;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Map;
 
 /**
  * @author shanchao
  * @date 2018-05-22
  */
-public class PropNotNullValidator implements ConstraintValidator<PropNotNull, Map> {
+public class PropNotNullValidator implements ConstraintValidator<PropNotNull, Object> {
 
     private String propName;
 
@@ -18,8 +19,8 @@ public class PropNotNullValidator implements ConstraintValidator<PropNotNull, Ma
     }
 
     @Override
-    public boolean isValid(Map value, ConstraintValidatorContext context) {
-        return value != null && value.get(propName) != null;
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        return value != null && BeanUtil.getProperty(value, propName) != null;
     }
 
 }
